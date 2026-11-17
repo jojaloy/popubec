@@ -1,16 +1,18 @@
 import { useEffect } from 'react'
 const cx = (...a) => a.filter(Boolean).join(' ')
 export const Button = ({ variant = 'primary', className, ...p }) => (
-  <button className={cx('rounded-full border-2 border-cocoa px-5 py-2 font-display font-semibold shadow-[3px_3px_0_#4a3228] transition active:translate-x-0.5 active:translate-y-0.5 active:shadow-none disabled:opacity-50',
-    variant === 'primary' ? 'bg-blush' : 'bg-paper', className)} {...p} />)
+  <button className={cx('rounded-md border px-4 py-2 text-sm font-semibold disabled:opacity-50',
+    variant === 'primary' ? 'border-rose bg-rose text-white hover:bg-rose/90' : 'border-cocoa/25 bg-white text-cocoa hover:bg-cocoa/5', className)} {...p} />)
 export const Field = ({ label, error, as: T = 'input', className, ...p }) => (
   <label className="block text-sm font-medium">{label}
-    <T className={cx('mt-1 w-full rounded-xl border-2 bg-white px-3 py-2', error ? 'border-rose' : 'border-cocoa/30', className)} {...p} />
-    {error && <span className="text-rose">{error}</span>}</label>)
+    <T className={cx('mt-1 w-full rounded-md border bg-white px-3 py-2 text-sm', error ? 'border-rose' : 'border-cocoa/25', className)} {...p} />
+    {error && <span className="mt-1 block text-xs text-rose">{error}</span>}</label>)
 export const Input = (p) => <Field {...p} />
 export const Select = (p) => <Field as="select" {...p} />
 export const Textarea = (p) => <Field as="textarea" rows={4} {...p} />
-export const Card = ({ className, ...p }) => <div className={cx('rounded-2xl border-2 border-cocoa bg-white p-5', className)} {...p} />
+export const Card = ({ className, ...p }) => <div className={cx('rounded-lg border border-cocoa/15 bg-white p-5 shadow-sm', className)} {...p} />
+export const Stat = ({ label, value }) => (
+  <div><p className="text-xs font-semibold uppercase tracking-wide text-cocoa/60">{label}</p><p className="mt-1 text-sm font-medium">{value}</p></div>)
 export function Modal({ open, title, onClose, children }) {
   useEffect(() => { const f = (e) => e.key === 'Escape' && onClose(); window.addEventListener('keydown', f); return () => window.removeEventListener('keydown', f) }, [onClose])
   if (!open) return null
@@ -19,9 +21,9 @@ export function Modal({ open, title, onClose, children }) {
       <div className="mb-3 flex items-center justify-between"><h2 className="text-xl">{title}</h2><button onClick={onClose} aria-label="Close">✕</button></div>{children}</Card></div>)
 }
 export const Table = ({ columns, rows, empty = 'Nothing here yet.' }) => (
-  <div className="overflow-x-auto rounded-2xl border-2 border-cocoa bg-white"><table className="w-full text-left text-sm">
-    <thead className="bg-blush/40"><tr>{columns.map((c) => <th key={c.key} className="p-3">{c.label}</th>)}</tr></thead>
-    <tbody>{rows.length ? rows.map((r, i) => <tr key={r.id ?? i} className="border-t border-cocoa/15">{columns.map((c) => <td key={c.key} className="p-3">{c.render ? c.render(r) : r[c.key]}</td>)}</tr>)
+  <div className="overflow-x-auto rounded-lg border border-cocoa/15 bg-white shadow-sm"><table className="w-full text-left text-sm">
+    <thead className="bg-cocoa/5 text-xs uppercase tracking-wide text-cocoa/70"><tr>{columns.map((c) => <th key={c.key} className="p-3 font-semibold">{c.label}</th>)}</tr></thead>
+    <tbody>{rows.length ? rows.map((r, i) => <tr key={r.id ?? i} className="border-t border-cocoa/10">{columns.map((c) => <td key={c.key} className="p-3">{c.render ? c.render(r) : r[c.key]}</td>)}</tr>)
       : <tr><td className="p-6 text-center" colSpan={columns.length}>{empty}</td></tr>}</tbody></table></div>)
-const tone = { Pending: 'bg-amber-100', Approved: 'bg-emerald-100', Rejected: 'bg-red-100', Available: 'bg-emerald-100', Reserved: 'bg-amber-100', Occupied: 'bg-blush/60' }
-export const StatusBadge = ({ status }) => <span className={cx('rounded-full border border-cocoa/40 px-3 py-0.5 text-xs font-semibold', tone[status])}>{status}</span>
+const tone = { Pending: 'bg-amber-100 text-amber-900', Approved: 'bg-emerald-100 text-emerald-900', Rejected: 'bg-red-100 text-red-900', Available: 'bg-emerald-100 text-emerald-900', Reserved: 'bg-amber-100 text-amber-900', Occupied: 'bg-blush/50 text-cocoa' }
+export const StatusBadge = ({ status }) => <span className={cx('rounded-full px-2.5 py-0.5 text-xs font-semibold', tone[status])}>{status}</span>
