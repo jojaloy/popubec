@@ -3,6 +3,6 @@
   --color-cocoa: #4a3228; --color-blush: #ee9fb6; --color-rose: #b04a6b; --color-paper: #f8f6f2;
   --font-display: 'Fredoka', ui-rounded, system-ui, sans-serif;
 }
-body { background: var(--color-paper); color: var(--color-cocoa); font-family: system-ui, sans-serif; }
-h1,h2,h3 { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.01em; }
-:focus-visible { outline: 3px solid var(--color-rose); outline-offset: 2px; }
+body { background: var(--color-paper); color: var(--color-cocoa); font-family: system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+h1,h2,h3 { font-family: var(--font-display); font-weight: 600; letter-spacing: -0.01em; }
+:focus-visible { outline: 2px solid var(--color-rose); outline-offset: 2px; }
