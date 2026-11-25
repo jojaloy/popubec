@@ -21,6 +21,7 @@ const Icon = ({ d }) => <svg viewBox="0 0 24 24" className="h-5 w-5 shrink-0" fi
 const browse = { title: 'Browse', items: [['/', 'Home', P.home], ['/about', 'About', P.info], ['/event', 'Event', P.event]] }
 const nav = {
   Visitor: [browse],
+  User: [browse],
   Tenant: [browse, { title: 'My account', items: [['/apply', 'Apply', P.apply], ['/status', 'My application', P.status], ['/reservations', 'Reservations', P.ticket], ['/profile/edit', 'My profile', P.user]] }],
   Admin: [{ title: 'Overview', items: [['/', 'Home', P.home], ['/admin', 'Dashboard', P.grid]] },
     { title: 'Manage', items: [['/admin/events', 'Events', P.event], ['/admin/applications', 'Applications', P.file], ['/admin/tenants', 'Tenants', P.users]] }],
@@ -30,7 +31,7 @@ export default function Layout() {
   const [open, setOpen] = useState(false)
   const groups = nav[role]
   const current = groups.flatMap((g) => g.items).find(([to]) => to === pathname)
-  const cta = role === 'Admin' ? ['/admin/events', 'Manage events'] : [role === 'Tenant' ? '/apply' : '/login', 'Apply for a tent']
+  const cta = role === 'Admin' ? ['/admin/events', 'Manage events'] : role === 'User' ? ['/event', 'See the event'] : [role === 'Tenant' ? '/apply' : '/login', 'Apply for a tent']
   const link = ({ isActive }) => `flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium ${isActive ? 'bg-white/15 text-white' : 'text-white/70 hover:bg-white/10 hover:text-white'}`
   return (<div className="min-h-screen">
     {open && <div className="fixed inset-0 z-40 bg-black/40 md:hidden" onClick={() => setOpen(false)} />}
