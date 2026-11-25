@@ -20,6 +20,6 @@ export default function Login() {
       <Input label="Password" type="password" autoComplete="current-password" value={f.password} onChange={set('password')} />
       {err && <p role="alert" className="text-rose">{err}</p>}
       <Button type="submit" className="w-full">Log in</Button></form>
-    <p className="mt-4 text-sm">New tenant? <Link to="/register" className="font-semibold underline">Create an account</Link></p>
-    <p className="mt-4 rounded-xl bg-blush/30 p-3 text-xs">Demo accounts: admin@popubec.ph / admin123 · tenant@popubec.ph / tenant123</p></Card>)
+    <p className="mt-4 text-sm">New here? <Link to="/register" className="font-semibold underline">Create an account</Link></p>
+    <p className="mt-4 rounded-xl bg-blush/30 p-3 text-xs">Demo accounts: admin@popubec.ph / admin123 · tenant@popubec.ph / tenant123 · user@popubec.ph / user123</p></Card>)
 }

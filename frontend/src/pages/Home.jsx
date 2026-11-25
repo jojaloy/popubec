@@ -28,7 +28,7 @@ export default function Home() {
           <span className="grid h-10 w-10 place-items-center rounded-full bg-blush font-display font-semibold text-cocoa">P</span>
           <div className="flex-1"><p className="text-sm font-semibold">Hosted by The Popubec</p><p className="text-xs text-cocoa/60">Community flea market</p></div>
           <div className="text-sm"><p className="text-xs text-cocoa/60">Open tents</p><p className="font-semibold">{availableTents}</p></div>
-          <Link to={role === 'Tenant' ? '/apply' : '/login'}><Button>Apply for a tent</Button></Link>
+          {role !== 'User' && <Link to={role === 'Tenant' ? '/apply' : '/login'}><Button>Apply for a tent</Button></Link>}
         </div>
         <div className="grid grid-cols-1 gap-4 border-b border-cocoa/10 p-4 sm:grid-cols-3">
           <Stat label="Date" value={ev.date} /><Stat label="Location" value={ev.venue} /><Stat label="Tents" value={`${availableTents} of ${tents.length} available`} />
