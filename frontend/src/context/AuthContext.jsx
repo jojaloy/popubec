@@ -13,13 +13,18 @@ export function AuthProvider({ children }) {
     if (!u) return { ok: false, error: 'Incorrect email or password.' }
     save(strip(u)); return { ok: true, user: strip(u) }
   }
-  const register = ({ name, email, password }) => {
+  const register = ({ name, email, password, role: wanted }) => {
     const mail = email.trim().toLowerCase()
     if ([...seedUsers, ...registered].some((x) => x.email === mail)) return { ok: false, error: 'That email is already registered.' }
-    const u = { id: `u${Date.now()}`, name: name.trim(), email: mail, password, role: 'Tenant' }
+    const u = { id: `u${Date.now()}`, name: name.trim(), email: mail, password, role: wanted === 'Tenant' ? 'Tenant' : 'User' }
     const next = [...registered, u]; setRegistered(next); localStorage.setItem('popubec-users', JSON.stringify(next))
     save(strip(u)); return { ok: true, user: strip(u) }
   }
-  return <Ctx.Provider value={{ user, role, login, register, logout: () => save(null) }}>{children}</Ctx.Provider>
+  const updateUser = (patch) => {
+    save({ ...user, ...patch })
+    const next = registered.map((x) => (x.id === user.id ? { ...x, ...patch } : x))
+    setRegistered(next); localStorage.setItem('popubec-users', JSON.stringify(next))
+  }
+  return <Ctx.Provider value={{ user, role, login, register, updateUser, logout: () => save(null) }}>{children}</Ctx.Provider>
 }
 export const useAuth = () => useContext(Ctx)
