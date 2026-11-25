@@ -14,6 +14,7 @@ const P = {
   grid: 'M3 3h7v9H3zM14 3h7v5h-7zM14 12h7v9h-7zM3 16h7v5H3z',
   file: 'M14 3H6a2 2 0 00-2 2v14a2 2 0 002 2h12a2 2 0 002-2V9zM14 3v6h6M8 13h8M8 17h8',
   users: 'M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75',
+  box: 'M21 8l-9-5-9 5v8l9 5 9-5zM3 8l9 5 9-5M12 13v8',
   menu: 'M4 6h16M4 12h16M4 18h16',
   out: 'M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9',
 }
@@ -22,7 +23,7 @@ const browse = { title: 'Browse', items: [['/', 'Home', P.home], ['/about', 'Abo
 const nav = {
   Visitor: [browse],
   User: [browse],
-  Tenant: [browse, { title: 'My account', items: [['/apply', 'Apply', P.apply], ['/status', 'My application', P.status], ['/reservations', 'Reservations', P.ticket], ['/profile/edit', 'My profile', P.user]] }],
+  Tenant: [browse, { title: 'My account', items: [['/apply', 'Apply', P.apply], ['/status', 'My application', P.status], ['/reservations', 'Reservations', P.ticket], ['/profile/edit', 'My profile', P.user], ['/products', 'My products', P.box]] }],
   Admin: [{ title: 'Overview', items: [['/', 'Home', P.home], ['/admin', 'Dashboard', P.grid]] },
     { title: 'Manage', items: [['/admin/events', 'Events', P.event], ['/admin/applications', 'Applications', P.file], ['/admin/tenants', 'Tenants', P.users]] }],
 }
